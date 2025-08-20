@@ -38,4 +38,34 @@ class CompetitionController extends Controller
         return redirect()->route('admin.competitions.index')
                             ->with('success', 'Competition created successfully!');
     }
+
+    public function edit($id)
+    {
+        $competitions = $this->competitionService->findById($id);
+        return view('admin.competitions.edit', compact('competitions'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            'name'=> 'required|string|max:255',
+            'description' => 'nullable|string'
+        ]);
+
+        $this->competitionService->update($id, $validated);
+
+        return redirect()->route('admin.competitions.index')
+                        ->with('success', 'Competition updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $this->competitionService->delete($id);
+
+        return redirect()->route('admin.competitions.index')->with('success', 'Competition deleted successfully!');
+    }
+
+    
+
+
 }

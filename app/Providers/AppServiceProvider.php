@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\CompetitionDivisionService;
 use App\Services\CompetitionService;
+use App\Services\Impl\CompetitionDivisionServiceImpl;
 use App\Services\Impl\CompetitionServiceImpl;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +24,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             CompetitionService::class,
             CompetitionServiceImpl::class
+        );
+
+        $this->app->bind(
+            \App\Repositories\CompetitionDivisionRepository::class,
+            \App\Repositories\Impl\CompetitionDivisionRepositoryImpl::class
+        );
+
+        $this->app->bind(
+            CompetitionDivisionService::class,
+            CompetitionDivisionServiceImpl::class
         );
     }
 

@@ -45,13 +45,13 @@
                                 
     <div class="justify-center items-center flex space-x-2">
         {{-- Edit Button --}}
-        <a href="" 
+        <a href="{{ route('admin.competitions.edit', $competition->id)}}" 
            class="px-3 py-1 text-sm bg-gray-500 text-white rounded-md hover:bg-blue-600 transition">
            Edit
         </a>
 
         {{-- Delete Button --}}
-        <form action="" 
+        <form action="{{ route('admin.competitions.destroy', $competition->id)}}" method="post" 
               method="POST" 
               onsubmit="return confirm('Yakin mau hapus data ini?');">
             @csrf

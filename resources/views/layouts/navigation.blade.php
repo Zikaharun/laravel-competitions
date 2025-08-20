@@ -26,6 +26,10 @@
                     <x-nav-link :href="route('admin.competitions.index')" :active="request()->routeIs('admin.competitions.index')">
                         {{ __('competitions') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.divisions.index')" :active="request()->routeIs('admin.competition_divisions.index')">
+                        {{ __('divisions') }}
+                    </x-nav-link>
+
                     @else
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}

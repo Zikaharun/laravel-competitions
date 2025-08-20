@@ -19,9 +19,26 @@ class CompetitionServiceImpl implements CompetitionService
     {
         return $this->competitionRepository->getAll();
     }
+
+    public function findById(string $id)
+    {
+        return $this->competitionRepository->findById($id);
+    }
+
+    public function update(string $id, array $data)
+    {
+
+        
+        return $this->competitionRepository->update($id,$data);
+    }
     
     public function store(array $data): Competition
     {
         return $this->competitionRepository->create($data);
+    }
+
+    public function delete(string $id)
+    {
+        return $this->competitionRepository->delete($id);
     }
 }

@@ -2,14 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Competition;
+use App\Models\CompetitionDivision;
 
-interface CompetitionService
+interface CompetitionDivisionService
 {
     public function getAll();
     public function findById(string $id);
     public function update(string $id, array $data);
-    public function store(array $data): Competition; 
+    public function store(array $data): CompetitionDivision; 
     public function delete(string $id);
-
 }

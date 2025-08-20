@@ -1,17 +1,15 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
-use App\Models\Competition;
+use App\Models\CompetitionDivision;
 
-interface CompetitionRepository
+interface CompetitionDivisionRepository
 {
     public function getAll();
 
     public function findById(string $id);
-    public function update(string $id, array $data);
+    public function update(string $competitionDivision, array $data);
     public function create(array $data);
     public function delete(string $id);
-
-
 }

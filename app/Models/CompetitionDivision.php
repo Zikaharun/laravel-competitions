@@ -10,6 +10,10 @@ class CompetitionDivision extends Model
 {
     use HasFactory,HasUuids;
 
+    protected $table = 'competition_divisions';
+
+    protected $fillable = ['user_id', 'competition_id'];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
