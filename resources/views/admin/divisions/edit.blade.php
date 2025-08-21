@@ -11,7 +11,7 @@
                         <div class="p-6 text-gray-100 dark:text-gray-500 text-center">
                             <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg">
                 <h1 class="text-xl font-semibold mb-4 text-gray-700">edit divisions</h1>
-                <form action="{{ route('admin.competitions.update', $divisions->id)}}" method="post">
+                <form action="{{ route('admin.divisions.update', $divisions->id)}}" method="post">
                 @csrf
                 @method('PUT')
                 @include('admin.divisions.partials.form', ['divisions' => $divisions])

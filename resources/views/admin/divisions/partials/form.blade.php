@@ -17,7 +17,7 @@
         <option value="">-- Select User --</option>
         @foreach($users as $user)
             <option value="{{ $user->id }}"
-                @selected(old('user_id', $division->user_id ?? '') == $user->id)>
+                @selected(old('user_id', $divisions->user_id ?? '') == $user->id)>
                 {{ $user->name }} ({{ $user->email }})
             </option>
         @endforeach
@@ -35,7 +35,7 @@
         <option value="">-- Select Competition --</option>
         @foreach($competitions as $competition)
             <option value="{{ $competition->id }}"
-                @selected(old('competition_id', $division->competition_id ?? '') == $competition->id)>
+                @selected(old('competition_id', $divisions->competition_id ?? '') == $competition->id)>
                 {{ $competition->name }}
             </option>
         @endforeach
@@ -46,7 +46,7 @@
 </div>
 
                     {{-- Button --}}
-                    <div>
+                    <div class="mt-4">
                         <button type="submit"
                             class="w-full inline-flex justify-center rounded-md border border-transparent bg-gray-500 px-4 py-2 text-sm font-medium text-white shadow-sm">
                             Save

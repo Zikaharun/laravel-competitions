@@ -48,9 +48,11 @@ class CompetitionDivisionController extends Controller
 
     public function edit(string $id)
     {
+        $users = User::where('role', 'users')->get();
+        $competitions = Competition::all();
         $divisions = $this->competitionDivisionService->findById($id);
 
-        return view('admin.divisions.edit', compact('divisions'));
+        return view('admin.divisions.edit', compact('divisions','users','competitions'));
     }
 
     public function update(Request $request, string $id)

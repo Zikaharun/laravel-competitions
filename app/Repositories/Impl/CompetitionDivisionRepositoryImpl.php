@@ -19,7 +19,8 @@ class CompetitionDivisionRepositoryImpl implements CompetitionDivisionRepository
     public function update(string $id, array $data)
     {
         $competitionDivison = $this->findById($id);
-        return $competitionDivison->update($competitionDivison);
+        $competitionDivison->update($data);
+        return $competitionDivison;
     }
     public function create(array $data)
     {

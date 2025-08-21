@@ -35,6 +35,16 @@ class AppServiceProvider extends ServiceProvider
             CompetitionDivisionService::class,
             CompetitionDivisionServiceImpl::class
         );
+
+        $this->app->bind(
+            \App\Repositories\ParticipantRepository::class,
+            \App\Repositories\Impl\ParticipantRepositoryImpl::class
+        );
+
+        $this->app->bind(
+            \App\Services\ParticipantService::class,
+            \App\Services\Impl\ParticipantServiceImpl::class
+        );
     }
 
     /**
