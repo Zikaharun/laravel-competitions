@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CompetitionDivisionController;
+use App\Http\Controllers\CompetitionDivisionParticipantController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -36,6 +37,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/divisions/{id}', [CompetitionDivisionController::class, 'edit'])->name('admin.divisions.edit');
     Route::put('/admin/divisions/{id}', [CompetitionDivisionController::class, 'update'])->name('admin.divisions.update');
     Route::delete('/admin/divisions/{id}', [CompetitionDivisionController::class, 'destroy'])->name('admin.divisions.destroy');
+
+    Route::get('/admin/participants/{divisionId}', [CompetitionDivisionParticipantController::class, 'index'])->name('admin.participant_ranking.index');
     
     Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -49,7 +52,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:users'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-    Route::get('/users/participants', [ParticipantController::class, 'index'])->name('participants');
+    Route::get('/users/participants', [ParticipantController::class, 'index'])->name('participants.index');
+    Route::post('/users/participants/create', [ParticipantController::class, 'store'])->name('participants.store');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

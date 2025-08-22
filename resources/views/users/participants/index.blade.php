@@ -13,7 +13,7 @@
                 <h1 class="text-xl font-semibold mb-4 text-gray-700">Tambah participant</h1>
 
                 {{-- Form Tambah --}}
-                {{-- <form method="POST" action="{{ route('admin.competitions.store') }}" class="space-y-4">
+                <form method="POST" action="{{ route('participants.store') }}" class="space-y-4">
                     @csrf
                     <div>
                         <label class="block text-sm font-medium text-gray-600">Nama</label>
@@ -22,16 +22,21 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-600">Deskripsi</label>
-                        <textarea name="description" rows="3" required
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                        <label class="block text-sm font-medium text-gray-600">rt</label>
+                        <input type="text" name="rt" rows="3" required
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-600">ranking</label>
+                        <input type="number" name="ranking" rows="3"
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
                     </div>
 
                     <button type="submit" 
                         class="w-full bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 transition">
                         Simpan
                     </button>
-                </form> --}}
+                </form>
 
                 {{-- List Participants --}}
                 <div class="mt-6">

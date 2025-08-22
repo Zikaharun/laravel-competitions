@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('rt');
-            $table->integer('ranking');
+            $table->integer('ranking')->nullable();
             $table->timestamps();
         });
     }
