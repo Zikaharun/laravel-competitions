@@ -46,4 +46,30 @@ class ParticipantController extends Controller
         return redirect()->route('participants.index')->with('success', 'Participants has been added!');
 
     }
+
+    public function edit(string $id)
+    {
+        $participants = $this->participantsService->findById($id);
+        return view('users.participants.edit', compact('participants'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'rt' => 'required|string|max:10',
+            'ranking' => 'nullable|integer'
+        ]);
+
+        $this->participantsService->update($id, $data);
+
+        return redirect()->route('participants.index')->with('success', 'Participants has been updated!');
+    }
+
+    public function destroy($id)
+    {
+        $this->participantsService->delete($id);
+
+        return redirect()->route('participants.index')->with('success', 'Participants deleted successfully!');
+    }
 }

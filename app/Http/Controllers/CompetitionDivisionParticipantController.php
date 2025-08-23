@@ -32,4 +32,10 @@ class CompetitionDivisionParticipantController extends Controller
         $divisions = $this->competitionDivisionParticipantService->listDivisionForParticipant($participantId);
         return view('admin.participant_ranking.index', compact('divisions'));
     }
+
+    public function destroy($divisionId, $participantId)
+    {
+        $this->competitionDivisionParticipantService->removeParticipantFromDivision($divisionId, $participantId);
+        return redirect()->back()->with('success', 'Participant removed from division successfully!');
+    }
 }

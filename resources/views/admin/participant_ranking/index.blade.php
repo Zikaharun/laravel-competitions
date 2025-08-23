@@ -84,9 +84,7 @@
                                         <td class="px-6 py-4">{{ $participan->ranking ?? '-' }}</td>
                                         <td class="px-6 py-4">{{ $participan->created_at->format('d M Y') }}</td>
                                         <td class="px-6 py-4 text-right  items-center">
-                                            {{-- <a href="{{ route('admin.divisions.edit', $division->id) }}"
-                                               class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
-                                            <form action="{{ route('admin.divisions.destroy', $division->id) }}"
+                                            {{-- <form action="{{ route('admin.participant_divisions.destroy', [$division->id, $participan->id]) }}"
                                                   method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')

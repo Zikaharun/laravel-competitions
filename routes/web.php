@@ -38,7 +38,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/divisions/{id}', [CompetitionDivisionController::class, 'update'])->name('admin.divisions.update');
     Route::delete('/admin/divisions/{id}', [CompetitionDivisionController::class, 'destroy'])->name('admin.divisions.destroy');
 
-    Route::get('/admin/participants/{divisionId}', [CompetitionDivisionParticipantController::class, 'index'])->name('admin.participant_ranking.index');
+    Route::get('/admin/participants/{divisionId}', [CompetitionDivisionParticipantController::class, 'index'])->name('admin.participants.index');
+    Route::delete('/divisions/{division}/participants/{participant}', [CompetitionDivisionParticipantController::class, 'destroy'])->name('admin.participant_divisions.destroy');
     
     Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -54,6 +55,9 @@ Route::middleware(['auth', 'role:users'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/users/participants', [ParticipantController::class, 'index'])->name('participants.index');
     Route::post('/users/participants/create', [ParticipantController::class, 'store'])->name('participants.store');
+    Route::get('/users/participants/{id}', [ParticipantController::class, 'edit'])->name('participants.edit');
+    Route::put('/users/participants/{id}', [ParticipantController::class, 'update'])->name('participants.update');
+    Route::delete('/users/participants/{id}', [ParticipantController::class, 'destroy'])->name('participants.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

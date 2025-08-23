@@ -51,13 +51,13 @@
                                                             
                                 <div class="justify-center items-center flex space-x-2">
                                     {{-- Edit Button --}}
-                                    {{-- <a href="{{ route('admin.competitions.edit', $competition->id)}}" 
+                                    <a href="{{ route('participants.edit', $participan->id)}}" 
                                     class="px-3 py-1 text-sm bg-gray-500 text-white rounded-md hover:bg-blue-600 transition">
                                     Edit
-                                    </a> --}}
+                                    </a>
 
                                     {{-- Delete Button --}}
-                                    {{-- <form action="{{ route('admin.competitions.destroy', $competition->id)}}" method="post" 
+                                    <form action="{{ route('participants.destroy', $participan->id)}}" method="post" 
                                         method="POST" 
                                         onsubmit="return confirm('Yakin mau hapus data ini?');">
                                         @csrf
@@ -66,7 +66,7 @@
                                                 class="px-3 ms-4 py-1 text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition">
                                             Delete
                                         </button>
-                                    </form> --}}
+                                    </form>
                                 </div>
                                                         </li>
                             @empty
