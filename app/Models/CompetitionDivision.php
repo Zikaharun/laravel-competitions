@@ -24,7 +24,7 @@ class CompetitionDivision extends Model
         return $this->belongsTo(Competition::class,'competition_id', 'id');
     }
 
-    public function participant()
+    public function participants()
     {
         return $this->belongsToMany(Participant::class, 'competition_division_participant');
     }

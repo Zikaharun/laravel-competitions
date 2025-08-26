@@ -23,9 +23,18 @@
                              @error('description') <div class="text-danger">{{ $message }}</div> @enderror
                     </div>
 
-                    <button type="submit" 
-                        class="w-full bg-gray-500 text-white py-2 rounded-md hover:bg-blue-600 transition">
-                        Simpan
-                    </button>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-600">Start Date & Time</label>
+                        <input type="datetime-local" name="start" value="{{ old('start', optional($competitions)->start ? \Carbon\Carbon::parse($competitions->start)->format('Y-m-d\TH:i:s') : '') }}" 
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        @error('start') <div class="text-danger">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-600">End Date & Time</label>
+                        <input type="datetime-local" name="end" value="{{ old('end', optional($competitions)->end ? \Carbon\Carbon::parse($competitions->end)->format('Y-m-d\TH:i:s') : '') }}" 
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        @error('end') <div class="text-danger">{{ $message }}</div> @enderror
+                    </div>
 
 </section>

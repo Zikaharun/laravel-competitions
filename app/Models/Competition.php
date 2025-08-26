@@ -18,7 +18,9 @@ class Competition extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'start',
+        'end'
     ];
 
     public function divisions()

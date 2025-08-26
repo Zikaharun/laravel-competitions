@@ -1,26 +1,36 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Competitions') }} 
-        </h2>
-    </x-slot>
+@extends('layouts.customs')
 
-            <div class="py-12 ">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class=" dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-100 dark:text-gray-500 text-center">
-                            <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg">
-                <h1 class="text-xl font-semibold mb-4 text-gray-700">Tambah Competition</h1>
-                <form action="{{ route('admin.competitions.update', $competitions->id)}}" method="post">
+@section('content')
+<div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-6">
+    <div class="max-w-3xl mx-auto">
+        <!-- Card Container -->
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8">
+            <!-- Title -->
+            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">
+                Edit Competition
+            </h1>
+
+            <!-- Form -->
+            <form action="{{ route('admin.competitions.update', $competitions->id) }}" method="POST" class="space-y-6">
                 @csrf
                 @method('PUT')
+
                 @include('admin.competitions.partials.form', ['competitions' => $competitions])
 
-                
-                </form>
-            </div>
-            </div>
-            </div>
+                <!-- Actions -->
+                <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <a href="{{ route('admin.competitions.index') }}" 
+                       class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                        Batal
+                    </a>
+
+                    <button type="submit" 
+                        class="px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-semibold shadow-md hover:shadow-lg transition">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection

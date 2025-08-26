@@ -11,17 +11,24 @@ class CompetitionDivisionParticipantRepositoryImpl implements CompetitionDivisio
     public function attachParticipant(string $competitionDivisionId, string $participantId)
     {
         $division = CompetitionDivision::findOrFail($competitionDivisionId);
-        return $division->participant()->attach($participantId);
+        return $division->participants()->attach($participantId);
     }
     public function detachParticipant(string $competitionDivisionId, string $participantId)
     {
         $division = CompetitionDivision::findOrFail($competitionDivisionId);
-        return $division->participant()->detach($participantId);
+        return $division->participants()->detach($participantId);
     }
     public function getParticipantsByDivision(string $competitionDivisionId)
     {
-        $division = CompetitionDivision::with('participant')->findOrFail($competitionDivisionId);
-        return $division->participant;
+         $division = CompetitionDivision::with(['participants', 'competition'])
+        ->findOrFail($competitionDivisionId);
+
+        // inject relasi competition ke setiap participant
+        $division->participants->each(function ($participants) use ($division) {
+        $participants->competition = $division->competition;
+    });
+
+    return $division->participants;
     }
     public function getDivisionsByParticipant(string $participantId)
     {

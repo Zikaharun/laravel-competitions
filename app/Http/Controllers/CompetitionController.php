@@ -28,12 +28,21 @@ class CompetitionController extends Controller
 
     public function store(Request $request)
     {
+        \Log::info('CompetitionController@store called', ['request' => $request->all()]);
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'start' => 'nullable|date',
+            'end'   => 'nullable|date|after_or_equal:start',
+
         ]);
 
+        \Log::info('CompetitionController@store validated data', ['validated' => $validated]);
+
         $this->competitionService->store($validated);
+
+        \Log::info('CompetitionController@store finished storing competition');
 
         return redirect()->route('admin.competitions.index')
                             ->with('success', 'Competition created successfully!');
@@ -49,7 +58,10 @@ class CompetitionController extends Controller
     {
         $validated = $request->validate([
             'name'=> 'required|string|max:255',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'start' => 'nullable|date',
+            'end'   => 'nullable|date|after_or_equal:start',
+
         ]);
 
         $this->competitionService->update($id, $validated);

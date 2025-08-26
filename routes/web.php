@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CompetitionDivisionController;
 use App\Http\Controllers\CompetitionDivisionParticipantController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotificationUserController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -38,8 +40,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/divisions/{id}', [CompetitionDivisionController::class, 'update'])->name('admin.divisions.update');
     Route::delete('/admin/divisions/{id}', [CompetitionDivisionController::class, 'destroy'])->name('admin.divisions.destroy');
 
-    Route::get('/admin/participants/{divisionId}', [CompetitionDivisionParticipantController::class, 'index'])->name('admin.participants.index');
-    Route::delete('/divisions/{division}/participants/{participant}', [CompetitionDivisionParticipantController::class, 'destroy'])->name('admin.participant_divisions.destroy');
+    Route::get('/admin/participants/{divisionId}', [CompetitionDivisionParticipantController::class, 'index'])->name('admin.participant_ranking.index');
+    Route::delete('/admin/participants/{id}', [CompetitionDivisionParticipantController::class, 'destroy'])->name('admin.participant_divisions.destroy');
+
+     Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/admin/notifications/create', [NotificationController::class, 'create'])->name('admin.notifications.create');
+    Route::post('/admin/notifications', [NotificationController::class, 'store'])->name('admin.notifications.store');
     
     Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -58,6 +64,8 @@ Route::middleware(['auth', 'role:users'])->group(function () {
     Route::get('/users/participants/{id}', [ParticipantController::class, 'edit'])->name('participants.edit');
     Route::put('/users/participants/{id}', [ParticipantController::class, 'update'])->name('participants.update');
     Route::delete('/users/participants/{id}', [ParticipantController::class, 'destroy'])->name('participants.destroy');
+    Route::get('/users/notifications', [NotificationUserController::class, 'index'])->name('user.notifications.index');
+    Route::get('/users/notifications/{id}', [NotificationUserController::class, 'show'])->name('user.notifications.show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

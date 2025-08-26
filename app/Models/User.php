@@ -50,4 +50,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(CompetitionDivision::class,'user_id', 'id');
     }
+
+    public function notifications()
+{
+    return $this->belongsToMany(\App\Models\Notification::class,'notification_users','user_id', 'notification_id')
+        ->withPivot(['emailed_at','read_at'])
+        ->withTimestamps();
+}
+
+
+
 }

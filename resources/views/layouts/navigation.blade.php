@@ -29,6 +29,22 @@
                     <x-nav-link :href="route('admin.divisions.index')" :active="request()->routeIs('admin.competition_divisions.index')">
                         {{ __('divisions') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.index')">
+                        <div class="relative flex items-center">
+                            <span>{{ __('Notifications') }}</span>
+                            @php
+                                 $unreadCount = Auth::user()
+                                    ->notifications()
+                                    ->wherePivotNull('read_at')
+                                    ->count();
+                            @endphp
+                            @if($unreadCount > 0)
+                                <span class="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                                    {{ $unreadCount }}
+                                </span>
+                            @endif
+                        </div>
+                    </x-nav-link>
 
                     @else
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -36,6 +52,22 @@
                     </x-nav-link>
                     <x-nav-link :href="route('participants.index')" :active="request()->routeIs('participants,index')">
                         {{ __('Participants') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('user.notifications.index')" :active="request()->routeIs('user.notifications.index')">
+                        <div class="relative flex items-center">
+                            <span>{{ __('Notifications') }}</span>
+                            @php
+                                $unreadCount = Auth::user()
+                                    ->notifications()
+                                    ->wherePivotNull('read_at')
+                                    ->count();
+                            @endphp
+                            @if($unreadCount > 0)
+                                <span class="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                                    {{ $unreadCount }}
+                                </span>
+                            @endif
+                        </div>
                     </x-nav-link>
                     @endif
                     
@@ -99,9 +131,57 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @if (Auth::user()->role === 'admin')
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.competitions.index')" :active="request()->routeIs('admin.competitions.index')">
+                        {{ __('competitions') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.divisions.index')" :active="request()->routeIs('admin.competition_divisions.index')">
+                        {{ __('divisions') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.index')">
+                        <div class="relative flex items-center">
+                            <span>{{ __('Notifications') }}</span>
+                            @php
+                                 $unreadCount = Auth::user()
+                                    ->notifications()
+                                    ->wherePivotNull('read_at')
+                                    ->count();
+                            @endphp
+                            @if($unreadCount > 0)
+                                <span class="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                                    {{ $unreadCount }}
+                                </span>
+                            @endif
+                        </div>
+                    </x-nav-link>
+
+                    @else
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('participants.index')" :active="request()->routeIs('participants,index')">
+                        {{ __('Participants') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('user.notifications.index')" :active="request()->routeIs('user.notifications.index')">
+                        <div class="relative flex items-center">
+                            <span>{{ __('Notifications') }}</span>
+                            @php
+                                $unreadCount = Auth::user()
+                                    ->notifications()
+                                    ->wherePivotNull('read_at')
+                                    ->count();
+                            @endphp
+                            @if($unreadCount > 0)
+                                <span class="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                                    {{ $unreadCount }}
+                                </span>
+                            @endif
+                        </div>
+                    </x-nav-link>
+                    @endif
         </div>
 
         <!-- Responsive Settings Options -->
@@ -112,9 +192,16 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+                        @if (Auth::user()->role === 'admin')
+                            <x-responsive-nav-link :href="route('admin.profile.edit')">
+                            {{ __('Profile') }}
+                        </x-responsive-nav-link>
+ 
+                        @else
+                        <x-responsive-nav-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-responsive-nav-link>
+                        @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
@@ -126,6 +213,7 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
+                    
             </div>
         </div>
     </div>
